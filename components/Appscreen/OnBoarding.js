@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
-import IconButton from "./IconButton";
-import { Colors } from "../../constants/styles";
+import IconButton from "../UI/IconButton";
+import { Colors } from "../../constant/style";
 
 const OnBoarding = ({
   image,
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: 400,
-    height: 300,
+    width: 300,
+    height: 200,
     marginBottom: 20,
   },
   text: {
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ObScreen;
+export default OnBoarding;

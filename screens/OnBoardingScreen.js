@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
-import ObScreen from "../components/ui/ObScreen";
 import { useNavigation } from "@react-navigation/native";
+import OnBoarding from "../components/Appscreen/OnBoarding";
 
 const OnBoardingScreen = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -11,9 +11,9 @@ const OnBoardingScreen = () => {
   const handleNext = () => {
     setCurrentStep(currentStep + 1);
     if (currentStep === 1) {
-      navigation.navigate("HomeScreen");
+      navigation.navigate("Home");
     } else if (currentStep === 2) {
-      navigation.navigate("HomeScreen");
+      navigation.navigate("Home");
     }
   };
 
@@ -27,22 +27,22 @@ const OnBoardingScreen = () => {
   // Define your onboarding step
   const onboardingSteps = [
     {
-      image: require("../assets/images/step1.png"),
+      image: require("../assets/image/step1.png"),
       text: 'Welcome to our app! Get started by clicking "Next".',
     },
     {
-      image: require("../assets/images/step1.png"),
+      image: require("../assets/image/step2.jpeg"),
       text: "Explore our amazing features!",
     },
     {
-      image: require("../assets/images/step1.png"),
+      image: require("../assets/image/step3.png"),
       text: 'Ready to go! Click "Finish" to start using the app.',
     },
   ];
 
   return (
     <View style={styles.container}>
-      <ObScreen
+      <OnBoarding
         image={onboardingSteps[currentStep].image}
         text={onboardingSteps[currentStep].text}
         onNext={handleNext}
