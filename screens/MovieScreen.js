@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
 import HorizontalCard from "../components/Appscreen/HorizontalCard";
+import SearchComponent from "../components/Appscreen/Search";
 
 function MovieScreen({ navigation }) {
   function handlePress() {
@@ -11,6 +12,7 @@ function MovieScreen({ navigation }) {
 
   return (
     <>
+      <SearchComponent />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.hcard}>
           <HorizontalCard children="New Movies" />

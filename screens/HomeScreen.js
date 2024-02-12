@@ -10,6 +10,7 @@ import {
 import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
 import HorizontalCard from "../components/Appscreen/HorizontalCard";
+import SearchComponent from "../components/Appscreen/Search";
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -18,6 +19,7 @@ function HomeScreen() {
   }
   return (
     <>
+      <SearchComponent />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.hcard}>
           <HorizontalCard children="New show" />

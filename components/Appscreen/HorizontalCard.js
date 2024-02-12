@@ -1,5 +1,14 @@
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from "react-native";
 import { Colors } from "../../constant/style";
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 function HorizontalCard({ children }) {
   const images = [];
@@ -7,7 +16,13 @@ function HorizontalCard({ children }) {
     <>
       <Text style={styles.text}>{children}</Text>
       <View style={styles.container}>
-        <ScrollView horizontal={true} style={styles.scroll}>
+        <ScrollView
+          horizontal={true}
+          style={styles.scroll}
+          snapToAlignment="center"
+          snapToInterval={SCREEN_WIDTH}
+          decelerationRate={"fast"}
+        >
           <Image
             style={styles.image}
             source={require("../../assets/image/step1.png")}
@@ -49,6 +64,7 @@ const styles = StyleSheet.create({
     padding: 2,
     marginRight: 8,
     borderRadius: 4,
+    width: SCREEN_WIDTH,
   },
   text: {
     fontSize: 20,
