@@ -11,9 +11,9 @@ const OnBoardingScreen = () => {
   const handleNext = () => {
     setCurrentStep(currentStep + 1);
     if (currentStep === 1) {
-      navigation.navigate("Home");
+      navigation.navigate("Login");
     } else if (currentStep === 2) {
-      navigation.navigate("Home");
+      navigation.navigate("Login");
     }
   };
 

@@ -11,8 +11,13 @@ import OnBoardingScreen from "./screens/OnBoardingScreen";
 import SignupScreen from "./screens/SignUpScreen";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { useContext } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import TvScreen from "./screens/TvScreen";
+import MovieScreen from "./screens/MovieScreen";
+import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
 
 function AuthStack() {
   return (
@@ -27,8 +32,15 @@ function AuthStack() {
           <IconButton icon="videocam-outline" color="white" size={30} />
         ),
       }}
-      initialRouteName="Login"
+      // initialRouteName="Login"
     >
+      <Stack.Screen
+        name="OnBoardingScreen"
+        component={OnBoardingScreen}
+        options={{
+          title: "Steps ",
+        }}
+      />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
     </Stack.Navigator>
@@ -38,44 +50,59 @@ function AuthStack() {
 function AuthenticatedStack() {
   const authCtx = useContext(AuthContext);
   return (
-    <Stack.Navigator
+    <BottomTab.Navigator
       screenOptions={{
+        tabBarActiveTintColor: Colors.primary500,
+        tabBarActiveBackgroundColor: Colors.primary100,
         headerStyle: { backgroundColor: Colors.primary700 },
         headerTintColor: "white",
-        contentStyle: { backgroundColor: Colors.primary50 },
         headerTitleAlign: "center",
-        headerTitleStyle: { fontWeight: "bold" },
         headerLeft: () => (
           <IconButton icon="videocam-outline" color="white" size={30} />
         ),
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            icon="exit-outline"
+            color={tintColor}
+            size={24}
+            onPress={authCtx.logout}
+          />
+        ),
       }}
-      initialRouteName="OnBoardingScreen"
+      sceneContainerStyle={{ backgroundColor: Colors.primary50 }}
     >
-      <Stack.Screen
-        name="OnBoardingScreen"
-        component={OnBoardingScreen}
-        options={{
-          title: "Steps ",
-        }}
-      />
-      <Stack.Screen
+      <BottomTab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          title: "Movies",
-          headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="exit-outline"
-              color={tintColor}
-              size={24}
-              onPress={authCtx.logout}
-            />
-          ),
+          title: "Home",
           headerLeft: () => null,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
+          ),
           headerBackVisible: false,
         }}
       />
-    </Stack.Navigator>
+      <BottomTab.Screen
+        name="Movies"
+        component={MovieScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="videocam-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="TvShow"
+        component={TvScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="tv-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen name="Details" component={DetailsScreen} />
+    </BottomTab.Navigator>
   );
 }
 
