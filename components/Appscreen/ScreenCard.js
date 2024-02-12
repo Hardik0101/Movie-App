@@ -12,10 +12,10 @@ const MovieScreenCard = ({ onPress, children }) => {
             source={require("../../assets/image/step1.png")}
             style={styles.image}
           />
-          <Image
+          {/* <Image
             source={require("../../assets/image/step1.png")}
             style={styles.image}
-          />
+          /> */}
         </TouchableOpacity>
       </View>
     </View>
@@ -25,7 +25,7 @@ const MovieScreenCard = ({ onPress, children }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: Colors.primary50,
+    backgroundColor: Colors.primary200,
     borderRadius: 10,
     marginBottom: 10,
     shadowColor: "#000",

@@ -1,23 +1,10 @@
-// import { Text, View } from "react-native";
-
-// function TvScreen() {
-//   return (
-//     <View>
-//       <Text>Tv Screen</Text>
-//     </View>
-//   );
-// }
-
-// export default TvScreen;
-
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
 
-const TvScreen = () => {
+function TvScreen({ navigation }) {
   function handlePress() {
-    const navigation = useNavigation();
     navigation.navigate("Details");
   }
 
@@ -25,13 +12,13 @@ const TvScreen = () => {
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <MovieScreenCard onPress={handlePress} children="New Movies" />
-          <MovieScreenCard onPress={handlePress} children="Old Movies" />
+          <MovieScreenCard onPress={handlePress} children="New Tv Show" />
+          <MovieScreenCard onPress={handlePress} children="Old Tv Show" />
         </View>
       </ScrollView>
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
