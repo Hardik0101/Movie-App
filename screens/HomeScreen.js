@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
+import HorizontalCard from "../components/Appscreen/HorizontalCard";
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -17,27 +18,18 @@ function HomeScreen() {
   }
   return (
     <>
-      <View>
-        <ScrollView style={styles.scroll} horizontal={true}>
-          <Image
-            style={styles.image}
-            source={require("../assets/image/step1.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../assets/image/step1.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../assets/image/step1.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../assets/image/step1.png")}
-          />
-        </ScrollView>
-        <MovieScreenCard children="New" onPress={handlePress} />
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.hcard}>
+          <HorizontalCard children="New show" />
+        </View>
+        <View style={styles.vcard}>
+          <MovieScreenCard children="New" onPress={handlePress} />
+          <MovieScreenCard children="New" onPress={handlePress} />
+          <MovieScreenCard children="New" onPress={handlePress} />
+          <MovieScreenCard children="New" onPress={handlePress} />
+          <MovieScreenCard children="New" onPress={handlePress} />
+        </View>
+      </ScrollView>
     </>
   );
 }
@@ -45,11 +37,10 @@ function HomeScreen() {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  scroll: {
-    // padding: 4,
+  hcard: {
+    marginBottom: 10,
   },
-  image: {
-    padding: 2,
-    marginLeft: 8,
+  vcard: {
+    marginHorizontal: 10,
   },
 });

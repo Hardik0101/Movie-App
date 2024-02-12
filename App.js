@@ -102,9 +102,30 @@ function AuthenticatedStack() {
             ),
           }}
         />
-        <BottomTab.Screen name="Details" component={DetailsScreen} />
+        {/* <BottomTab.Screen name="Details" component={DetailsScreen} /> */}
       </BottomTab.Navigator>
     </>
+  );
+}
+
+function NewStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.primary700 },
+        headerTintColor: "white",
+        contentStyle: { backgroundColor: Colors.primary50 },
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontWeight: "bold" },
+      }}
+    >
+      <Stack.Screen
+        name="New"
+        component={AuthenticatedStack}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Details" component={DetailsScreen} />
+    </Stack.Navigator>
   );
 }
 
@@ -114,7 +135,7 @@ function Navigation() {
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />}
+      {authCtx.isAuthenticated && <NewStack />}
     </NavigationContainer>
   );
 }

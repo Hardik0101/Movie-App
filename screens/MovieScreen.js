@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
+import HorizontalCard from "../components/Appscreen/HorizontalCard";
 
 function MovieScreen({ navigation }) {
   function handlePress() {
@@ -11,9 +12,15 @@ function MovieScreen({ navigation }) {
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
+        <View style={styles.hcard}>
+          <HorizontalCard children="New Movies" />
+        </View>
+        <View style={styles.vcard}>
           <MovieScreenCard onPress={handlePress} children="New Movies" />
           <MovieScreenCard onPress={handlePress} children="Old Movies" />
+          <MovieScreenCard children="New" onPress={handlePress} />
+          <MovieScreenCard children="New" onPress={handlePress} />
+          <MovieScreenCard children="New" onPress={handlePress} />
         </View>
       </ScrollView>
     </>
@@ -21,9 +28,11 @@ function MovieScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
+  hcard: {
+    marginBottom: 10,
+  },
+  vcard: {
+    marginHorizontal: 10,
   },
 });
 
