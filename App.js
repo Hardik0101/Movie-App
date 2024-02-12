@@ -5,10 +5,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { Colors } from "./constant/style";
 import IconButton from "./components/UI/IconButton";
-// import LoginScreen from "./screens/LoginScreen";
+import LoginScreen from "./screens/LoginScreen";
 import DetailsScreen from "./screens/DetailsScreen";
 import OnBoardingScreen from "./screens/OnBoardingScreen";
-// import SignupScreen from "./screens/SignUpScreen";
+import SignupScreen from "./screens/SignUpScreen";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -26,20 +26,25 @@ export default function App() {
             headerLeft: () => (
               <IconButton icon="videocam-outline" color="white" size={30} />
             ),
-            headerRight: () => (
-              <IconButton
-                icon="person-circle-outline"
-                color="white"
-                size={30}
-              />
-            ),
           }}
         >
           <Stack.Screen name="Steps" component={OnBoardingScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
-          {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
-          {/* <Stack.Screen name="SignUp" component={SignupScreen} /> */}
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              headerRight: () => (
+                <IconButton
+                  icon="person-circle-outline"
+                  color="white"
+                  size={30}
+                />
+              ),
+            }}
+          />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

@@ -1,13 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, Button } from "react-native";
 
 function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <View>
       <Text>Home Screen</Text>
     </View>
   );
 }
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({});
