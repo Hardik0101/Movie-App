@@ -1,65 +1,120 @@
 import React, { useState } from "react";
-import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import OnBoarding from "../components/Appscreen/OnBoarding";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  Image,
+} from "react-native";
+import { Colors } from "../constant/style";
+import Button from "../components/UI/Button";
 
-const OnBoardingScreen = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [disable, setDisable] = useState(false);
-  const navigation = useNavigation();
+const { width } = Dimensions.get("window");
 
-  const handleNext = () => {
-    setCurrentStep(currentStep + 1);
-    if (currentStep === 1) {
-      navigation.navigate("Login");
-    } else if (currentStep === 2) {
-      navigation.navigate("Login");
-    }
+function OnboardingScreen1({ navigation }) {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const handleScroll = (event) => {
+    const { contentOffset } = event.nativeEvent;
+    const page = Math.round(contentOffset.x / width);
+    setCurrentPage(page);
   };
 
-  const handlePrevious = () => {
-    setCurrentStep(currentStep - 1);
-    if (currentStep === 0) {
-      setDisable(true);
-    }
+  const handleLogin = () => {
+    navigation.navigate("Login");
   };
 
-  // Define your onboarding step
-  const onboardingSteps = [
+  const handleSignUp = () => {
+    navigation.navigate("Signup");
+  };
+  const pages = [
     {
       image: require("../assets/image/step1.png"),
-      text: 'Welcome to our app! Get started by clicking "Next".',
+      title: "Welcome to Movie Mania!",
+      description: "Explore the world of cinema like never before.",
     },
     {
       image: require("../assets/image/step2.jpeg"),
-      text: "Explore our amazing features!",
+      title: "Discover Your Favorites",
+      description: "Find the movies you love effortlessly.",
     },
     {
       image: require("../assets/image/step3.png"),
-      text: 'Ready to go! Click "Finish" to start using the app.',
+
+      title: "Personalized Recommendations",
+      description: "Let us tailor your movie experience.",
     },
   ];
 
   return (
     <View style={styles.container}>
-      <OnBoarding
-        image={onboardingSteps[currentStep].image}
-        text={onboardingSteps[currentStep].text}
-        onNext={handleNext}
-        onPrevious={handlePrevious}
-        disabled={disable}
-        currentStep={currentStep}
-      />
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
+        {pages.map((page, index) => (
+          <View key={index} style={styles.pageContainer}>
+            <Image style={styles.image} source={page.image} />
+            <Text style={styles.title}>{page.title}</Text>
+            <Text style={styles.description}>{page.description}</Text>
+          </View>
+        ))}
+      </ScrollView>
+      <View style={styles.button}>
+        {currentPage === pages.length - 1 && (
+          <>
+            <View style={styles.buttons}>
+              <Button onPress={handleLogin}>Login</Button>
+              <Button onPress={handleSignUp}>Signup</Button>
+            </View>
+          </>
+        )}
+      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: -30,
     justifyContent: "center",
     alignItems: "center",
   },
+  pageContainer: {
+    width,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+    color: Colors.primary700,
+  },
+  description: {
+    fontSize: 16,
+    textAlign: "center",
+    color: Colors.primary600,
+  },
+  image: {
+    marginBottom: 10,
+  },
+  button: {
+    marginBottom: 50,
+  },
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "60%",
+  },
 });
 
-export default OnBoardingScreen;
+export default OnboardingScreen1;

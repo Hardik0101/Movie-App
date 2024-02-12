@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TvScreen from "./screens/TvScreen";
 import MovieScreen from "./screens/MovieScreen";
 import { Ionicons } from "@expo/vector-icons";
+import OnboardingScreen1 from "./screens/OnBoardingScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -36,7 +37,7 @@ function AuthStack() {
     >
       <Stack.Screen
         name="OnBoardingScreen"
-        component={OnBoardingScreen}
+        component={OnboardingScreen1}
         options={{
           title: "Steps ",
         }}

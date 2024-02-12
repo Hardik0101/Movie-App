@@ -4,8 +4,6 @@ import AuthForm from "./AuthForm";
 import { useNavigation } from "@react-navigation/native";
 import { Colors } from "../../constant/style";
 import FlatButton from "../UI/FlatButton";
-import IconButton from "../UI/IconButton";
-import Button from "../UI/Button";
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
@@ -31,7 +29,11 @@ function AuthContent({ isLogin, onAuthenticate }) {
     password = password.trim();
 
     const emailIsValid = email.includes("@");
-    const passwordIsValid = password.length > 6; // special char | upper case | lower case | number
+    const passwordIsValid =
+      /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,}$/.test(
+        password
+      );
+
     const emailsAreEqual = email === confirmEmail;
     const passwordsAreEqual = password === confirmPassword;
 
@@ -43,7 +45,10 @@ function AuthContent({ isLogin, onAuthenticate }) {
       });
       return;
     } else if (!passwordIsValid || (!isLogin && !passwordsAreEqual)) {
-      Alert.alert("Invalid input", "Please enter 6 digit password.");
+      Alert.alert(
+        "Invalid input",
+        "Please enter Strong Password like aBc@#123"
+      );
       setCredentialsInvalid({
         password: !passwordIsValid,
         confirmPassword: !passwordIsValid || !passwordsAreEqual,
