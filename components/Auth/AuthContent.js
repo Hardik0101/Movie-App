@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, Image, StyleSheet, View, Text, ScrollView } from "react-native";
 import AuthForm from "./AuthForm";
 import { useNavigation } from "@react-navigation/native";
 import { Colors } from "../../constant/style";
 import FlatButton from "../UI/FlatButton";
+import IconButton from "../UI/IconButton";
+import Button from "../UI/Button";
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
@@ -52,18 +54,26 @@ function AuthContent({ isLogin, onAuthenticate }) {
   }
 
   return (
-    <View style={styles.authContent}>
-      <AuthForm
-        isLogin={isLogin}
-        onSubmit={submitHandler}
-        credentialsInvalid={credentialsInvalid}
-      />
-      <View style={styles.buttons}>
-        <FlatButton onPress={switchAuthModeHandler}>
-          {isLogin ? "Create a new user" : "Log in instead"}
-        </FlatButton>
-      </View>
-    </View>
+    <>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Image
+          style={styles.image}
+          source={require("../../assets/image/image.png")}
+        />
+        <View style={styles.authContent}>
+          <AuthForm
+            isLogin={isLogin}
+            onSubmit={submitHandler}
+            credentialsInvalid={credentialsInvalid}
+          />
+          <View style={styles.buttons}>
+            <FlatButton onPress={switchAuthModeHandler}>
+              {isLogin ? "Create a new user" : "Log in instead"}
+            </FlatButton>
+          </View>
+        </View>
+      </ScrollView>
+    </>
   );
 }
 
@@ -84,5 +94,12 @@ const styles = StyleSheet.create({
   },
   buttons: {
     marginTop: 8,
+  },
+  image: {
+    width: 300,
+    height: 200,
+    marginLeft: 18,
+    resizeMode: "contain",
+    marginBottom: -56,
   },
 });
