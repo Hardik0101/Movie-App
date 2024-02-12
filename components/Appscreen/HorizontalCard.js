@@ -5,13 +5,13 @@ import {
   StyleSheet,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import { Colors } from "../../constant/style";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-function HorizontalCard({ children }) {
-  const images = [];
+function HorizontalCard({ children, onPress, navigation }) {
   return (
     <>
       <Text style={styles.text}>{children}</Text>
@@ -23,22 +23,24 @@ function HorizontalCard({ children }) {
           snapToInterval={SCREEN_WIDTH}
           decelerationRate={"fast"}
         >
-          <Image
-            style={styles.image}
-            source={require("../../assets/image/step1.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../../assets/image/step1.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../../assets/image/step1.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../../assets/image/step1.png")}
-          />
+          <TouchableOpacity style={styles.imageContent} onPress={onPress}>
+            <Image
+              style={styles.image}
+              source={require("../../assets/image/step1.png")}
+            />
+            <Image
+              style={styles.image}
+              source={require("../../assets/image/step1.png")}
+            />
+            <Image
+              style={styles.image}
+              source={require("../../assets/image/step1.png")}
+            />
+            <Image
+              style={styles.image}
+              source={require("../../assets/image/step1.png")}
+            />
+          </TouchableOpacity>
         </ScrollView>
       </View>
     </>
@@ -48,6 +50,9 @@ function HorizontalCard({ children }) {
 export default HorizontalCard;
 
 const styles = StyleSheet.create({
+  imageContent: {
+    flexDirection: "row",
+  },
   container: {
     padding: 6,
     backgroundColor: Colors.primary200,

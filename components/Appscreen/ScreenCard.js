@@ -12,10 +12,6 @@ const MovieScreenCard = ({ onPress, children }) => {
             source={require("../../assets/image/step1.png")}
             style={styles.image}
           />
-          {/* <Image
-            source={require("../../assets/image/step1.png")}
-            style={styles.image}
-          /> */}
         </TouchableOpacity>
       </View>
     </View>

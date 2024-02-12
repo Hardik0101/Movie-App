@@ -15,7 +15,7 @@ function MovieScreen({ navigation }) {
       <SearchComponent />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.hcard}>
-          <HorizontalCard children="New Movies" />
+          <HorizontalCard children="New Movies" onPress={handlePress} />
         </View>
         <View style={styles.vcard}>
           <MovieScreenCard onPress={handlePress} children="New Movies" />

@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  Button,
-  ScrollView,
-  FlatList,
-  Image,
-  StyleSheet,
-} from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
 import HorizontalCard from "../components/Appscreen/HorizontalCard";
@@ -22,7 +14,7 @@ function HomeScreen() {
       <SearchComponent />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.hcard}>
-          <HorizontalCard children="New show" />
+          <HorizontalCard children="New show" onPress={handlePress} />
         </View>
         <View style={styles.vcard}>
           <MovieScreenCard children="New" onPress={handlePress} />
