@@ -5,9 +5,9 @@ import SearchComponent from "../components/Cards/Search";
 import VerticalCard from "../components/Cards/VerticalCard";
 import { getPopularTvShow } from "../Api/ApiCall";
 
-function TvScreen({ navigation }) {
+function TvShowScreen({ navigation }) {
   function handlePress(id, type) {
-    navigation.navigate("TvDetails", { id, type });
+    navigation.navigate("TvShowDetails", { id, type });
   }
 
   return (
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TvScreen;
+export default TvShowScreen;

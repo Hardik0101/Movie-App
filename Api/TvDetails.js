@@ -1,20 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getDetails, getDetailsTV } from "./ApiCall";
+import { getDetails, getDetailsTV, getTvShowDetails } from "./ApiCall";
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
-export function TvDetails({ title, overview }) {
-  const [details, setDetails] = useState("");
+export function TvShowDetails({ title, overview }) {
+  const [tvDetails, setTvDetails] = useState("");
   const route = useRoute();
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      const allDetails = await getDetailsTV(route.params.id, route.params.type);
-      setDetails(allDetails);
+    const fetchTvShowDetails = async () => {
+      const allTvShowDetails = await getTvShowDetails(
+        route.params.id,
+        route.params.type
+      );
+      setTvDetails(allTvShowDetails);
     };
 
-    fetchDetails();
+    fetchTvShowDetails();
   }, []);
 
   return (
@@ -24,12 +27,12 @@ export function TvDetails({ title, overview }) {
           <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w300/${details.poster_path}`,
+              uri: `https://image.tmdb.org/t/p/w300/${tvDetails.poster_path}`,
             }}
             resizeMode="cover"
           />
-          <Text style={styles.title}>{details.name}</Text>
-          <Text style={styles.overview}>{details.overview}</Text>
+          <Text style={styles.title}>{tvDetails.name}</Text>
+          <Text style={styles.overview}>{tvDetails.overview}</Text>
         </View>
       </ScrollView>
     </>
@@ -38,7 +41,6 @@ export function TvDetails({ title, overview }) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
   },
-  details: {
+  overview: {
     fontSize: 16,
   },
   image: {

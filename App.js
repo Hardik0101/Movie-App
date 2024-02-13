@@ -1,23 +1,22 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image } from "react-native";
-import HomeScreen from "./screens/HomeScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
 import { Colors } from "./constant/style";
 import IconButton from "./components/UI/IconButton";
+import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
-import DetailsScreen from "./screens/DetailsScreen";
-import OnBoardingScreen from "./screens/OnBoardingScreen";
 import SignupScreen from "./screens/SignUpScreen";
-import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import { useContext } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import TvScreen from "./screens/TvScreen";
-import MovieScreen from "./screens/MovieScreen";
-import { Ionicons } from "@expo/vector-icons";
 import OnboardingScreen1 from "./screens/OnBoardingScreen";
-import { TvDetails } from "./Api/TvDetails";
 import Favorite from "./screens/Favorite";
+import MovieScreen from "./screens/MovieScreen";
+import TvShowScreen from "./screens/TvScreen";
+import { Ionicons } from "@expo/vector-icons";
+import { useContext } from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import AuthContextProvider, { AuthContext } from "./store/auth-context";
+import { MoviesDetails } from "./Api/MoviesDetails";
+import { TvShowDetails } from "./Api/TvDetails";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -35,7 +34,6 @@ function AuthStack() {
           <IconButton icon="videocam-outline" color="white" size={30} />
         ),
       }}
-      // initialRouteName="Login"
     >
       <Stack.Screen
         name="OnBoardingScreen"
@@ -50,7 +48,7 @@ function AuthStack() {
   );
 }
 
-function AuthenticatedStack() {
+function AuthenticatedTab() {
   const authCtx = useContext(AuthContext);
   return (
     <>
@@ -98,7 +96,7 @@ function AuthenticatedStack() {
         />
         <BottomTab.Screen
           name="TvShow"
-          component={TvScreen}
+          component={TvShowScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="tv-outline" color={color} size={size} />
@@ -119,7 +117,7 @@ function AuthenticatedStack() {
   );
 }
 
-function NewStack() {
+function CombineStack() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -132,12 +130,12 @@ function NewStack() {
     >
       <Stack.Screen
         name="New"
-        component={AuthenticatedStack}
+        component={AuthenticatedTab}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
+        name="MoviesDetails"
+        component={MoviesDetails}
         options={{
           headerRight: ({ tintColor }) => (
             <IconButton icon="bookmark-outline" color={tintColor} size={24} />
@@ -145,8 +143,8 @@ function NewStack() {
         }}
       />
       <Stack.Screen
-        name="TvDetails"
-        component={TvDetails}
+        name="TvShowDetails"
+        component={TvShowDetails}
         options={{
           headerRight: ({ tintColor }) => (
             <IconButton icon="bookmark-outline" color={tintColor} size={24} />
@@ -163,7 +161,7 @@ function Navigation() {
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <NewStack />}
+      {authCtx.isAuthenticated && <CombineStack />}
     </NavigationContainer>
   );
 }

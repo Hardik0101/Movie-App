@@ -7,11 +7,11 @@ import VerticalCard from "../components/Cards/VerticalCard";
 
 function HomeScreen() {
   const navigation = useNavigation();
-  function handlePress(id, type) {
-    navigation.navigate("Details", { id, type });
+  function handlePress(id) {
+    navigation.navigate("MoviesDetails", { id });
   }
-  function handlePressTv(id, type) {
-    navigation.navigate("TvDetails", { id, type });
+  function handlePressTv(id) {
+    navigation.navigate("TvShowDetails", { id });
   }
 
   return (

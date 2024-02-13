@@ -2,12 +2,12 @@ import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import HorizontalCard from "../components/Cards/HorizontalCard";
 import SearchComponent from "../components/Cards/Search";
-import { getHorrorMovies, getPopularMovie } from "../Api/ApiCall";
+import { getPopularMovie } from "../Api/ApiCall";
 import VerticalCard from "../components/Cards/VerticalCard";
 
 function MovieScreen({ navigation }) {
-  function handlePress(id, type) {
-    navigation.navigate("Details", { id, type });
+  function handlePress(id) {
+    navigation.navigate("MoviesDetails", { id });
   }
 
   return (

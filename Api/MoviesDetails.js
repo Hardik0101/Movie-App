@@ -1,20 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getDetails } from "./ApiCall";
+import { getMoviesDetails } from "./ApiCall";
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
-export function Details({ title, overview }) {
-  const [details, setDetails] = useState("");
+export function MoviesDetails({ title, overview }) {
+  const [movieDetails, setMovieDetails] = useState("");
   const route = useRoute();
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      const allDetails = await getDetails(route.params.id, route.params.type);
-      setDetails(allDetails);
+    const fetchMoviesDetails = async () => {
+      const allMoviesDetails = await getMoviesDetails(
+        route.params.id,
+        route.params.type
+      );
+      setMovieDetails(allMoviesDetails);
     };
 
-    fetchDetails();
+    fetchMoviesDetails();
   }, []);
 
   return (
@@ -24,12 +27,12 @@ export function Details({ title, overview }) {
           <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w300/${details.poster_path}`,
+              uri: `https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`,
             }}
             resizeMode="cover"
           />
-          <Text style={styles.title}>{details.title}</Text>
-          <Text style={styles.overview}>{details.overview}</Text>
+          <Text style={styles.title}>{movieDetails.title}</Text>
+          <Text style={styles.overview}>{movieDetails.overview}</Text>
         </View>
       </ScrollView>
     </>
@@ -38,7 +41,6 @@ export function Details({ title, overview }) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
   },
-  details: {
+  overview: {
     fontSize: 16,
   },
   image: {
