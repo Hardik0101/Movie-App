@@ -1,14 +1,9 @@
 import { View, ScrollView, StyleSheet } from "react-native";
-import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
-import HorizontalCard from "../components/Appscreen/HorizontalCard";
-import SearchComponent from "../components/Appscreen/Search";
-import { useEffect, useState } from "react";
-import {
-  getAiringToday,
-  getPopularMovie,
-  getUpcomingMovie,
-} from "../Api/ApiCall";
+import HorizontalCard from "../components/Cards/HorizontalCard";
+import SearchComponent from "../components/Cards/Search";
+import { getAiringTodayTvShow, getUpcomingMovie } from "../Api/ApiCall";
+import VerticalCard from "../components/Cards/VerticalCard";
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -20,29 +15,29 @@ function HomeScreen() {
     <>
       <SearchComponent />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.hcard}>
+        <View style={styles.horizontalCardView}>
           <HorizontalCard
             children="New show"
             onPress={handlePress}
-            data1={getUpcomingMovie}
+            functions={getUpcomingMovie}
           />
         </View>
-        <View style={styles.vcard}>
-          <MovieScreenCard children="New" onPress={handlePress} />
-          <MovieScreenCard children="New" onPress={handlePress} />
-          <MovieScreenCard children="New" onPress={handlePress} />
+        <View style={styles.verticalCardView}>
+          <VerticalCard children="New" onPress={handlePress} />
+          <VerticalCard children="New" onPress={handlePress} />
+          <VerticalCard children="New" onPress={handlePress} />
         </View>
-        <View style={styles.hcard}>
+        <View style={styles.horizontalCardView}>
           <HorizontalCard
             children="New TV show"
             onPress={handlePress}
-            data1={getAiringToday}
+            functions={getAiringTodayTvShow}
           />
         </View>
-        <View style={styles.vcard}>
-          <MovieScreenCard children="New" onPress={handlePress} />
-          <MovieScreenCard children="New" onPress={handlePress} />
-          <MovieScreenCard children="New" onPress={handlePress} />
+        <View style={styles.verticalCardView}>
+          <VerticalCard children="New" onPress={handlePress} />
+          <VerticalCard children="New" onPress={handlePress} />
+          <VerticalCard children="New" onPress={handlePress} />
         </View>
       </ScrollView>
     </>
@@ -52,10 +47,10 @@ function HomeScreen() {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  hcard: {
+  horizontalCardView: {
     marginBottom: 10,
   },
-  vcard: {
+  verticalCardView: {
     marginHorizontal: 10,
   },
 });

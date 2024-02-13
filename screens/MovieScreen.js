@@ -1,10 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import MovieScreenCard from "../components/Appscreen/ScreenCard";
-import { useNavigation } from "@react-navigation/native";
-import HorizontalCard from "../components/Appscreen/HorizontalCard";
-import SearchComponent from "../components/Appscreen/Search";
-import { getPopularMovie, getPopularTvData } from "../Api/ApiCall";
+import { View, StyleSheet, ScrollView } from "react-native";
+import HorizontalCard from "../components/Cards/HorizontalCard";
+import SearchComponent from "../components/Cards/Search";
+import { getHorrorMovies, getPopularMovie } from "../Api/ApiCall";
+import VerticalCard from "../components/Cards/VerticalCard";
 
 function MovieScreen({ navigation }) {
   function handlePress() {
@@ -15,19 +14,22 @@ function MovieScreen({ navigation }) {
     <>
       <SearchComponent />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.hcard}>
+        <View style={styles.horizontalCardView}>
           <HorizontalCard
             children="New Movies"
             onPress={handlePress}
-            data1={getPopularMovie}
+            functions={getPopularMovie}
           />
         </View>
-        <View style={styles.vcard}>
-          <MovieScreenCard onPress={handlePress} children="New Movies" />
-          <MovieScreenCard onPress={handlePress} children="Old Movies" />
-          <MovieScreenCard children="New" onPress={handlePress} />
-          <MovieScreenCard children="New" onPress={handlePress} />
-          <MovieScreenCard children="New" onPress={handlePress} />
+        <View style={styles.verticalCardView}>
+          <VerticalCard
+            onPress={handlePress}
+            children="Comedy Movies"
+            functions={getHorrorMovies}
+          />
+          <VerticalCard onPress={handlePress} children="Romantic Movies" />
+          <VerticalCard onPress={handlePress} children="Thriller Movies" />
+          <VerticalCard onPress={handlePress} children="Action Movies" />
         </View>
       </ScrollView>
     </>
@@ -35,10 +37,10 @@ function MovieScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  hcard: {
+  horizontalCardView: {
     marginBottom: 10,
   },
-  vcard: {
+  verticalCardView: {
     marginHorizontal: 10,
   },
 });

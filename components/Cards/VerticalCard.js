@@ -3,18 +3,18 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { Colors } from "../../constant/style";
 
-function MovieScreenCard({ children, onPress, data1 }) {
-  const [datas, setData] = useState([]);
+function VerticalCard({ children, onPress, functions }) {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const popularData = await data1();
+      const popularData = await functions();
       setData(popularData);
     };
 
@@ -29,7 +29,7 @@ function MovieScreenCard({ children, onPress, data1 }) {
           style={styles.scroll}
           decelerationRate={"fast"}
         >
-          {datas.map((data, index) => (
+          {data.map((data, index) => (
             <TouchableOpacity key={index} onPress={onPress}>
               <Image
                 style={styles.image}
@@ -47,6 +47,11 @@ function MovieScreenCard({ children, onPress, data1 }) {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
   container: {
     padding: 8,
     backgroundColor: Colors.primary200,
@@ -59,10 +64,8 @@ const styles = StyleSheet.create({
     elevation: 3,
     height: 166,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
+  scroll: {
+    width: "100%",
   },
   image: {
     width: 100,
@@ -70,12 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginRight: 8,
   },
-  innerContainer: {
-    flexDirection: "row",
-  },
-  scroll: {
-    width: "100%",
-  },
 });
 
-export default MovieScreenCard;
+export default VerticalCard;

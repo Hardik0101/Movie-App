@@ -1,10 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import MovieScreenCard from "../components/Appscreen/ScreenCard";
-import { useNavigation } from "@react-navigation/native";
-import HorizontalCard from "../components/Appscreen/HorizontalCard";
-import SearchComponent from "../components/Appscreen/Search";
-import { getPopularTvData } from "../Api/ApiCall";
+import { View, StyleSheet, ScrollView } from "react-native";
+import HorizontalCard from "../components/Cards/HorizontalCard";
+import SearchComponent from "../components/Cards/Search";
+import VerticalCard from "../components/Cards/VerticalCard";
+import { getPopularTvShow } from "../Api/ApiCall";
 
 function TvScreen({ navigation }) {
   function handlePress() {
@@ -19,19 +18,19 @@ function TvScreen({ navigation }) {
           <HorizontalCard
             children="New TV Show"
             onPress={handlePress}
-            data1={getPopularTvData}
+            functions={getPopularTvShow}
           />
         </View>
-        <View style={styles.vcard}>
-          <MovieScreenCard
+        <View style={styles.verticalCardView}>
+          <VerticalCard
             onPress={handlePress}
             children="New Tv Show"
-            data1={getPopularTvData}
+            functions={getPopularTvShow}
           />
-          <MovieScreenCard
+          <VerticalCard
             onPress={handlePress}
             children="New Tv Show"
-            data1={getPopularTvData}
+            functions={getPopularTvShow}
           />
         </View>
       </ScrollView>
@@ -40,10 +39,10 @@ function TvScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  hcard: {
+  horizontalCardView: {
     marginBottom: 10,
   },
-  vcard: {
+  verticalCardView: {
     marginHorizontal: 10,
   },
 });

@@ -7,6 +7,7 @@ const API_KEY_POPULAR_MOVIE = `${API_BASE_URL}movie/popular?api_key=${API_KEY}`;
 const API_KEY_POPULAR_TV = `${API_BASE_URL}tv/popular?api_key=${API_KEY}`;
 const API_M_UPCOMING = `${API_BASE_URL}movie/upcoming?api_key=${API_KEY}`;
 const API_TV_TODAY = `${API_BASE_URL}tv/airing_today?api_key=${API_KEY}`;
+// const API_M_HORROR = `https://api.themoviedb.org/27/movie/horror?api_key=${API_KEY}`;
 
 export async function getPopularMovie() {
   try {
@@ -18,7 +19,7 @@ export async function getPopularMovie() {
   }
 }
 
-export async function getPopularTvData() {
+export async function getPopularTvShow() {
   try {
     const response = await axios.get(API_KEY_POPULAR_TV);
     return response.data.results.slice(0, 10);
@@ -38,9 +39,19 @@ export async function getUpcomingMovie() {
   }
 }
 
-export async function getAiringToday() {
+export async function getAiringTodayTvShow() {
   try {
     const response = await axios.get(API_TV_TODAY);
+    return response.data.results.slice(0, 10);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getHorrorMovies() {
+  try {
+    const response = await axios.get(API_M_HORROR);
     return response.data.results.slice(0, 10);
   } catch (error) {
     console.log(error);

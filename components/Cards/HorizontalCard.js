@@ -12,12 +12,12 @@ import { useEffect, useState } from "react";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-function HorizontalCard({ children, onPress, data1 }) {
-  const [datas, setData] = useState([]);
+function HorizontalCard({ children, onPress, functions }) {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const popularData = await data1();
+      const popularData = await functions();
       setData(popularData);
     };
 
@@ -25,7 +25,7 @@ function HorizontalCard({ children, onPress, data1 }) {
   }, []);
   return (
     <>
-      <Text style={styles.text}>{children}</Text>
+      <Text style={styles.title}>{children}</Text>
       <View style={styles.container}>
         <ScrollView
           horizontal={true}
@@ -34,8 +34,9 @@ function HorizontalCard({ children, onPress, data1 }) {
           snapToInterval={SCREEN_WIDTH}
           decelerationRate={"fast"}
         >
-          {datas.map((data, index) => (
+          {data.map((data, index) => (
             <TouchableOpacity
+              activeOpacity={0.7}
               key={index}
               style={styles.imageContent}
               onPress={onPress}
@@ -45,7 +46,7 @@ function HorizontalCard({ children, onPress, data1 }) {
                 source={{
                   uri: `https://image.tmdb.org/t/p/w300/${data.poster_path}`,
                 }}
-                resizeMode="contain"
+                resizeMode="cover"
               />
             </TouchableOpacity>
           ))}
@@ -58,35 +59,30 @@ function HorizontalCard({ children, onPress, data1 }) {
 export default HorizontalCard;
 
 const styles = StyleSheet.create({
-  imageContent: {
-    flexDirection: "row",
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: Colors.primary600,
+    textAlign: "center",
   },
   container: {
-    // padding: 6,
     height: 500,
-    // backgroundColor: Colors.primary200,
     borderRadius: 10,
     marginHorizontal: 10,
-    shadowColor: "#000",
-    // shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 3,
     marginTop: 10,
+    overflow: "hidden",
+  },
+  scroll: {
+    width: "100%",
+  },
+  imageContent: {
+    flexDirection: "row",
     overflow: "hidden",
   },
   image: {
     padding: 2,
     borderRadius: 10,
     width: SCREEN_WIDTH,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: Colors.primary600,
-    textAlign: "center",
-  },
-  scroll: {
-    width: "100%",
+    overflow: "hidden",
   },
 });
