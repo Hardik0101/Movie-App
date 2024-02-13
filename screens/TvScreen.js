@@ -23,8 +23,16 @@ function TvScreen({ navigation }) {
           />
         </View>
         <View style={styles.vcard}>
-          <MovieScreenCard onPress={handlePress} children="New Tv Show" />
-          <MovieScreenCard onPress={handlePress} children="Old Tv Show" />
+          <MovieScreenCard
+            onPress={handlePress}
+            children="New Tv Show"
+            data1={getPopularTvData}
+          />
+          <MovieScreenCard
+            onPress={handlePress}
+            children="New Tv Show"
+            data1={getPopularTvData}
+          />
         </View>
       </ScrollView>
     </>

@@ -1,26 +1,54 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { Colors } from "../../constant/style";
 
-const MovieScreenCard = ({ onPress, children }) => {
+function MovieScreenCard({ children, onPress, data1 }) {
+  const [datas, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const popularData = await data1();
+      setData(popularData);
+    };
+
+    fetchData();
+  }, []);
   return (
-    <View style={styles.container}>
+    <>
       <Text style={styles.title}>{children}</Text>
-      <View style={styles.imageContainer}>
-        <TouchableOpacity style={styles.innerContainer} onPress={onPress}>
-          <Image
-            source={require("../../assets/image/step1.png")}
-            style={styles.image}
-          />
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <ScrollView
+          horizontal={true}
+          style={styles.scroll}
+          decelerationRate={"fast"}
+        >
+          {datas.map((data, index) => (
+            <TouchableOpacity key={index} onPress={onPress}>
+              <Image
+                style={styles.image}
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w300/${data.poster_path}`,
+                }}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
-    </View>
+    </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 8,
     backgroundColor: Colors.primary200,
     borderRadius: 10,
     marginBottom: 10,
@@ -29,25 +57,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 3,
+    height: 166,
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
   },
-  imageContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   image: {
     width: 100,
     height: 150,
-    borderRadius: 5,
-    marginBottom: 10,
+    borderRadius: 6,
     marginRight: 8,
   },
   innerContainer: {
     flexDirection: "row",
+  },
+  scroll: {
+    width: "100%",
   },
 });
 
