@@ -6,7 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignUpScreen";
 import OnboardingScreen1 from "./screens/OnBoardingScreen";
-import Favorite from "./screens/Favorite";
+import BookMarks from "./screens/BookMarks";
 import MovieScreen from "./screens/MovieScreen";
 import TvShowScreen from "./screens/TvScreen";
 import { Ionicons } from "@expo/vector-icons";
@@ -104,8 +104,8 @@ function AuthenticatedTab() {
           }}
         />
         <BottomTab.Screen
-          name="Favorite"
-          component={Favorite}
+          name="Bookmarks"
+          component={BookMarks}
           options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="bookmark-outline" color={color} size={size} />

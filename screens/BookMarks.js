@@ -1,11 +1,11 @@
 import { View, Text } from "react-native";
 
-function Favorite() {
+function BookMarks() {
   return (
     <View>
-      <Text>Favorite</Text>
+      <Text>BookMarks</Text>
     </View>
   );
 }
 
-export default Favorite;
+export default BookMarks;

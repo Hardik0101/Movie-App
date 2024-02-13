@@ -19,6 +19,7 @@ function SearchComponent() {
         placeholder="Search..."
         onChangeText={(text) => setSearchText(text)}
         value={searchText}
+        returnKeyType="search"
       />
     </View>
   );
