@@ -6,8 +6,8 @@ import VerticalCard from "../components/Cards/VerticalCard";
 import { getPopularTvShow } from "../Api/ApiCall";
 
 function TvScreen({ navigation }) {
-  function handlePress() {
-    navigation.navigate("Details");
+  function handlePress(id, type) {
+    navigation.navigate("TvDetails", { id, type });
   }
 
   return (

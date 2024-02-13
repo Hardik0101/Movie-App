@@ -7,8 +7,11 @@ import VerticalCard from "../components/Cards/VerticalCard";
 
 function HomeScreen() {
   const navigation = useNavigation();
-  function handlePress() {
-    navigation.navigate("Details");
+  function handlePress(id, type) {
+    navigation.navigate("Details", { id, type });
+  }
+  function handlePressTv(id, type) {
+    navigation.navigate("TvDetails", { id, type });
   }
 
   return (
@@ -30,13 +33,13 @@ function HomeScreen() {
         <View style={styles.horizontalCardView}>
           <HorizontalCard
             children="New TV show"
-            onPress={handlePress}
+            onPress={handlePressTv}
             functions={getAiringTodayTvShow}
           />
         </View>
         <View style={styles.verticalCardView}>
-          <VerticalCard children="New" onPress={handlePress} />
-          <VerticalCard children="New" onPress={handlePress} />
+          <VerticalCard children="New" onPress={handlePressTv} />
+          <VerticalCard children="New" onPress={handlePressTv} />
           <VerticalCard children="New" onPress={handlePress} />
         </View>
       </ScrollView>

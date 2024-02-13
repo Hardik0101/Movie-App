@@ -6,8 +6,8 @@ import { getHorrorMovies, getPopularMovie } from "../Api/ApiCall";
 import VerticalCard from "../components/Cards/VerticalCard";
 
 function MovieScreen({ navigation }) {
-  function handlePress() {
-    navigation.navigate("Details");
+  function handlePress(id, type) {
+    navigation.navigate("Details", { id, type });
   }
 
   return (

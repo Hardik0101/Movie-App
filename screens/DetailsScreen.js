@@ -1,13 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import { getDetailsTV } from "../Api/ApiCall";
+import { Details } from "../Api/Details";
 
 function DetailsScreen() {
-  return (
-    <View>
-      <Text>Details Screen</Text>
-    </View>
-  );
+  return <Details />;
 }
 
 export default DetailsScreen;
-
-const styles = StyleSheet.create({});

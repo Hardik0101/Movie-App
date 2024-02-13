@@ -30,7 +30,10 @@ function VerticalCard({ children, onPress, functions }) {
           decelerationRate={"fast"}
         >
           {data.map((data, index) => (
-            <TouchableOpacity key={index} onPress={onPress}>
+            <TouchableOpacity
+              key={index}
+              onPress={() => onPress(data.id, data.type)}
+            >
               <Image
                 style={styles.image}
                 source={{

@@ -16,6 +16,7 @@ import TvScreen from "./screens/TvScreen";
 import MovieScreen from "./screens/MovieScreen";
 import { Ionicons } from "@expo/vector-icons";
 import OnboardingScreen1 from "./screens/OnBoardingScreen";
+import { TvDetails } from "./Api/TvDetails";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -126,6 +127,7 @@ function NewStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="TvDetails" component={TvDetails} />
     </Stack.Navigator>
   );
 }

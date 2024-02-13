@@ -39,7 +39,7 @@ function HorizontalCard({ children, onPress, functions }) {
               activeOpacity={0.7}
               key={index}
               style={styles.imageContent}
-              onPress={onPress}
+              onPress={() => onPress(data.id, data.type)}
             >
               <Image
                 style={styles.image}
