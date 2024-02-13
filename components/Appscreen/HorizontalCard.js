@@ -8,10 +8,21 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Colors } from "../../constant/style";
+import { useEffect, useState } from "react";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-function HorizontalCard({ children, onPress, navigation }) {
+function HorizontalCard({ children, onPress, data1 }) {
+  const [datas, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const popularData = await data1();
+      setData(popularData);
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <Text style={styles.text}>{children}</Text>
@@ -23,24 +34,21 @@ function HorizontalCard({ children, onPress, navigation }) {
           snapToInterval={SCREEN_WIDTH}
           decelerationRate={"fast"}
         >
-          <TouchableOpacity style={styles.imageContent} onPress={onPress}>
-            <Image
-              style={styles.image}
-              source={require("../../assets/image/step1.png")}
-            />
-            <Image
-              style={styles.image}
-              source={require("../../assets/image/step1.png")}
-            />
-            <Image
-              style={styles.image}
-              source={require("../../assets/image/step1.png")}
-            />
-            <Image
-              style={styles.image}
-              source={require("../../assets/image/step1.png")}
-            />
-          </TouchableOpacity>
+          {datas.map((data, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.imageContent}
+              onPress={onPress}
+            >
+              <Image
+                style={styles.image}
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w300/${data.poster_path}`,
+                }}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </View>
     </>
@@ -54,21 +62,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   container: {
-    padding: 6,
-    backgroundColor: Colors.primary200,
+    // padding: 6,
+    height: 500,
+    // backgroundColor: Colors.primary200,
     borderRadius: 10,
     marginHorizontal: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    // shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 3,
     marginTop: 10,
+    overflow: "hidden",
   },
   image: {
     padding: 2,
-    marginRight: 8,
-    borderRadius: 4,
+    borderRadius: 10,
     width: SCREEN_WIDTH,
   },
   text: {

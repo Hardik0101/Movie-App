@@ -4,6 +4,7 @@ import MovieScreenCard from "../components/Appscreen/ScreenCard";
 import { useNavigation } from "@react-navigation/native";
 import HorizontalCard from "../components/Appscreen/HorizontalCard";
 import SearchComponent from "../components/Appscreen/Search";
+import { getPopularTvData } from "../Api/ApiCall";
 
 function TvScreen({ navigation }) {
   function handlePress() {
@@ -14,7 +15,14 @@ function TvScreen({ navigation }) {
     <>
       <SearchComponent />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
+        <View style={styles.hcard}>
+          <HorizontalCard
+            children="New TV Show"
+            onPress={handlePress}
+            data1={getPopularTvData}
+          />
+        </View>
+        <View style={styles.vcard}>
           <MovieScreenCard onPress={handlePress} children="New Tv Show" />
           <MovieScreenCard onPress={handlePress} children="Old Tv Show" />
         </View>
@@ -24,9 +32,11 @@ function TvScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
+  hcard: {
+    marginBottom: 10,
+  },
+  vcard: {
+    marginHorizontal: 10,
   },
 });
 
