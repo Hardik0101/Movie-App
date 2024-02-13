@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { getDetails } from "./ApiCall";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
 export function Details({ title, overview }) {
@@ -19,17 +19,19 @@ export function Details({ title, overview }) {
 
   return (
     <>
-      <View style={styles.container}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: `https://image.tmdb.org/t/p/w300/${details.poster_path}`,
-          }}
-          resizeMode="cover"
-        />
-        <Text style={styles.title}>{details.title}</Text>
-        <Text style={styles.overview}>{details.overview}</Text>
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: `https://image.tmdb.org/t/p/w300/${details.poster_path}`,
+            }}
+            resizeMode="cover"
+          />
+          <Text style={styles.title}>{details.title}</Text>
+          <Text style={styles.overview}>{details.overview}</Text>
+        </View>
+      </ScrollView>
     </>
   );
 }

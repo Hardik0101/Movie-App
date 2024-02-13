@@ -25,11 +25,23 @@ function MovieScreen({ navigation }) {
           <VerticalCard
             onPress={handlePress}
             children="Comedy Movies"
-            functions={getHorrorMovies}
+            functions={getPopularMovie}
           />
-          <VerticalCard onPress={handlePress} children="Romantic Movies" />
-          <VerticalCard onPress={handlePress} children="Thriller Movies" />
-          <VerticalCard onPress={handlePress} children="Action Movies" />
+          <VerticalCard
+            onPress={handlePress}
+            children="Romantic Movies"
+            functions={getPopularMovie}
+          />
+          <VerticalCard
+            onPress={handlePress}
+            children="Thriller Movies"
+            functions={getPopularMovie}
+          />
+          <VerticalCard
+            onPress={handlePress}
+            children="Action Movies"
+            functions={getPopularMovie}
+          />
         </View>
       </ScrollView>
     </>

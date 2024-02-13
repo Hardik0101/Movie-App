@@ -17,6 +17,7 @@ import MovieScreen from "./screens/MovieScreen";
 import { Ionicons } from "@expo/vector-icons";
 import OnboardingScreen1 from "./screens/OnBoardingScreen";
 import { TvDetails } from "./Api/TvDetails";
+import Favorite from "./screens/Favorite";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -104,7 +105,15 @@ function AuthenticatedStack() {
             ),
           }}
         />
-        {/* <BottomTab.Screen name="Details" component={DetailsScreen} /> */}
+        <BottomTab.Screen
+          name="Favorite"
+          component={Favorite}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="bookmark-outline" color={color} size={size} />
+            ),
+          }}
+        />
       </BottomTab.Navigator>
     </>
   );
@@ -126,8 +135,24 @@ function NewStack() {
         component={AuthenticatedStack}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Details" component={DetailsScreen} />
-      <Stack.Screen name="TvDetails" component={TvDetails} />
+      <Stack.Screen
+        name="Details"
+        component={DetailsScreen}
+        options={{
+          headerRight: ({ tintColor }) => (
+            <IconButton icon="bookmark-outline" color={tintColor} size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="TvDetails"
+        component={TvDetails}
+        options={{
+          headerRight: ({ tintColor }) => (
+            <IconButton icon="bookmark-outline" color={tintColor} size={24} />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 }

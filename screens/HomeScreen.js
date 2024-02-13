@@ -20,15 +20,27 @@ function HomeScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.horizontalCardView}>
           <HorizontalCard
-            children="New show"
+            children="New Movies"
             onPress={handlePress}
             functions={getUpcomingMovie}
           />
         </View>
         <View style={styles.verticalCardView}>
-          <VerticalCard children="New" onPress={handlePress} />
-          <VerticalCard children="New" onPress={handlePress} />
-          <VerticalCard children="New" onPress={handlePress} />
+          <VerticalCard
+            children="New"
+            onPress={handlePress}
+            functions={getUpcomingMovie}
+          />
+          <VerticalCard
+            children="New"
+            onPress={handlePress}
+            functions={getUpcomingMovie}
+          />
+          <VerticalCard
+            children="New"
+            onPress={handlePress}
+            functions={getUpcomingMovie}
+          />
         </View>
         <View style={styles.horizontalCardView}>
           <HorizontalCard
@@ -38,9 +50,21 @@ function HomeScreen() {
           />
         </View>
         <View style={styles.verticalCardView}>
-          <VerticalCard children="New" onPress={handlePressTv} />
-          <VerticalCard children="New" onPress={handlePressTv} />
-          <VerticalCard children="New" onPress={handlePress} />
+          <VerticalCard
+            children="New"
+            onPress={handlePressTv}
+            functions={getAiringTodayTvShow}
+          />
+          <VerticalCard
+            children="New"
+            onPress={handlePressTv}
+            functions={getAiringTodayTvShow}
+          />
+          <VerticalCard
+            children="New"
+            onPress={handlePressTv}
+            functions={getAiringTodayTvShow}
+          />
         </View>
       </ScrollView>
     </>
