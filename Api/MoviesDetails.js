@@ -3,23 +3,31 @@ import { useEffect, useState } from "react";
 import { getMoviesDetails } from "./ApiCall";
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovieDetails } from "../store/redux/movieSlice";
 
 export function MoviesDetails({ title, overview }) {
-  const [movieDetails, setMovieDetails] = useState("");
+  // const [movieDetails, setMovieDetails] = useState("");
   const route = useRoute();
+  // console.log(route);
+  const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   const fetchMoviesDetails = async () => {
+  //     const allMoviesDetails = await getMoviesDetails(
+  //       route.params.id,
+  //       route.params.type
+  //     );
+  //     setMovieDetails(allMoviesDetails);
+  //   };
+
+  //   fetchMoviesDetails();
+  // }, []);
+  const data = useSelector((state) => state);
   useEffect(() => {
-    const fetchMoviesDetails = async () => {
-      const allMoviesDetails = await getMoviesDetails(
-        route.params.id,
-        route.params.type
-      );
-      setMovieDetails(allMoviesDetails);
-    };
-
-    fetchMoviesDetails();
-  }, []);
-
+    dispatch(fetchMovieDetails(route.params.id));
+  }, [dispatch]);
+  console.log(data);
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -27,12 +35,14 @@ export function MoviesDetails({ title, overview }) {
           <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`,
+              uri: `https://image.tmdb.org/t/p/w300/${data?.movies?.moviesDetails?.poster_path}`,
             }}
             resizeMode="cover"
           />
-          <Text style={styles.title}>{movieDetails.title}</Text>
-          <Text style={styles.overview}>{movieDetails.overview}</Text>
+          <Text style={styles.title}>{data?.movies?.moviesDetails?.title}</Text>
+          <Text style={styles.overview}>
+            {data?.movies?.moviesDetails?.overview}
+          </Text>
         </View>
       </ScrollView>
     </>

@@ -17,6 +17,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { MoviesDetails } from "./Api/MoviesDetails";
 import { TvShowDetails } from "./Api/TvDetails";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -70,6 +72,13 @@ function AuthenticatedTab() {
               onPress={authCtx.logout}
             />
           ),
+          tabBarStyle: {
+            paddingBottom: 10,
+          },
+          tabBarHideOnKeyboard: true,
+          // tabBarBackground: () => {
+          //   Colors.primary10;
+          // },
         }}
         sceneContainerStyle={{ backgroundColor: Colors.primary10 }}
       >
@@ -170,9 +179,11 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <AuthContextProvider>
-        <Navigation />
-      </AuthContextProvider>
+      <Provider store={store}>
+        <AuthContextProvider>
+          <Navigation />
+        </AuthContextProvider>
+      </Provider>
     </>
   );
 }
