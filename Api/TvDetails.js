@@ -1,21 +1,56 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { getDetails, getDetailsTV, getTvShowDetails } from "./ApiCall";
-import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTvShowDetails } from "../store/redux/tvSlice";
 
-export function TvShowDetails({ title, overview }) {
-  const [tvDetails, setTvDetails] = useState("");
+export function TvShowDetails() {
   const route = useRoute();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const data = useSelector((state) => state);
 
   useEffect(() => {
-    const fetchTvShowDetails = async () => {
-      const allTvShowDetails = await getTvShowDetails(route.params.id);
-      setTvDetails(allTvShowDetails);
-    };
+    async function fetchTvShowData() {
+      try {
+        setTimeout(() => {
+          dispatch(fetchTvShowDetails(route.params.id));
+          setLoading(false);
+        }, 1000);
+      } catch (error) {
+        setError(true);
+        setLoading(false);
+      }
+    }
 
-    fetchTvShowDetails();
-  }, []);
+    fetchTvShowData();
+  }, [dispatch, route.params.id]);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error occurred while loading data.</Text>
+      </View>
+    );
+  }
 
   return (
     <>
@@ -24,12 +59,14 @@ export function TvShowDetails({ title, overview }) {
           <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w300/${tvDetails.poster_path}`,
+              uri: `https://image.tmdb.org/t/p/w300/${data?.tvShow?.tvShowDetails?.poster_path}`,
             }}
             resizeMode="cover"
           />
-          <Text style={styles.title}>{tvDetails.name}</Text>
-          <Text style={styles.overview}>{tvDetails.overview}</Text>
+          <Text style={styles.title}>{data?.tvShow?.tvShowDetails?.name}</Text>
+          <Text style={styles.overview}>
+            {data?.tvShow?.tvShowDetails?.overview}
+          </Text>
         </View>
       </ScrollView>
     </>
@@ -54,5 +91,15 @@ const styles = StyleSheet.create({
     width: 340,
     height: 500,
     borderRadius: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

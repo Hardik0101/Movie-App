@@ -54,7 +54,7 @@ function SearchComponent({ type }) {
     } else if (type === "tv") {
       navigation.navigate("TvShowDetails", { id });
     } else if (type === "home") {
-      navigation.navigate("TvShowDetails", { id });
+      navigation.navigate("MoviesDetails" || "TvShowDetails", { id });
     }
   };
 

@@ -15,7 +15,7 @@ const movieSlice = createSlice({
 });
 
 export const fetchMovieDetails = createAsyncThunk(
-  "movies/movieDetails/fetchMovieDetails",
+  "movieDetails/fetchMovieDetails",
   async (id, { dispatch }) => {
     try {
       const movieDetails = await getMoviesDetails(id);
