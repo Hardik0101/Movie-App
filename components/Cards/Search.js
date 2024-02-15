@@ -40,6 +40,7 @@ function SearchComponent({ type }) {
           query: searchText,
         },
       });
+      // console.log(response);
       setSearchResults(response.data.results);
     } catch (error) {
       console.error("Error fetching search results: ", error);
@@ -48,19 +49,21 @@ function SearchComponent({ type }) {
     }
   }
 
-  const handlePress = (id, type) => {
+  const handlePress = (item) => {
     if (type === "movie") {
-      navigation.navigate("MoviesDetails", { id });
+      navigation.navigate("MoviesDetails", { id: item.id });
     } else if (type === "tv") {
-      navigation.navigate("TvShowDetails", { id });
-    } else if (type === "home") {
-      navigation.navigate("MoviesDetails" || "TvShowDetails", { id });
+      navigation.navigate("TvShowDetails", { id: item.id });
+    } else if (item.media_type === "movie") {
+      navigation.navigate("MoviesDetails", { id: item.id });
+    } else if (item.media_type === "tv") {
+      navigation.navigate("TvShowDetails", { id: item.id });
     }
   };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      onPress={() => handlePress(item.id, type)}
+      onPress={() => handlePress(item, type)}
       style={styles.searchData}
     >
       <Text style={styles.title}>{item.title || item.name}</Text>

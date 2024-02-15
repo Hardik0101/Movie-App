@@ -22,10 +22,10 @@ export function MoviesDetails({ title, overview }) {
   useEffect(() => {
     async function fetchMovieData() {
       try {
+        dispatch(fetchMovieDetails(route.params.id));
         setTimeout(() => {
-          dispatch(fetchMovieDetails(route.params.id));
           setLoading(false);
-        }, 1000);
+        }, 2000);
       } catch (error) {
         setError(true);
         setLoading(false);
@@ -33,6 +33,9 @@ export function MoviesDetails({ title, overview }) {
     }
 
     fetchMovieData();
+    return () => {
+      clearTimeout(dispatch);
+    };
   }, [dispatch, route.params.id]);
 
   if (loading) {
@@ -58,7 +61,10 @@ export function MoviesDetails({ title, overview }) {
           <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w300/${data?.movies?.movieDetails?.poster_path}`,
+              uri:
+                data.movies.movieDetails.poster_path !== null
+                  ? `https://image.tmdb.org/t/p/w300/${data?.movies?.movieDetails?.poster_path}`
+                  : "https://media.comicbook.com/files/img/default-movie.png",
             }}
             resizeMode="cover"
           />

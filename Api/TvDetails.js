@@ -23,17 +23,19 @@ export function TvShowDetails() {
   useEffect(() => {
     async function fetchTvShowData() {
       try {
+        dispatch(fetchTvShowDetails(route.params.id));
         setTimeout(() => {
-          dispatch(fetchTvShowDetails(route.params.id));
           setLoading(false);
-        }, 1000);
+        }, 2000);
       } catch (error) {
         setError(true);
         setLoading(false);
       }
     }
-
     fetchTvShowData();
+    return () => {
+      clearTimeout(dispatch);
+    };
   }, [dispatch, route.params.id]);
 
   if (loading) {
@@ -59,7 +61,10 @@ export function TvShowDetails() {
           <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w300/${data?.tvShow?.tvShowDetails?.poster_path}`,
+              uri:
+                data.tvShow.tvShowDetails.poster_path !== null
+                  ? `https://image.tmdb.org/t/p/w300/${data?.tvShow?.tvShowDetails?.poster_path}`
+                  : "https://media.comicbook.com/files/img/default-movie.png",
             }}
             resizeMode="cover"
           />

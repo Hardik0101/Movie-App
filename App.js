@@ -6,7 +6,6 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignUpScreen";
 import OnboardingScreen1 from "./screens/OnBoardingScreen";
-import BookMarks from "./screens/BookMarks";
 import MovieScreen from "./screens/MovieScreen";
 import TvShowScreen from "./screens/TvScreen";
 import { Ionicons } from "@expo/vector-icons";
