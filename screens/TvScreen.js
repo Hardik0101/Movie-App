@@ -12,7 +12,7 @@ function TvShowScreen({ navigation }) {
 
   return (
     <>
-      <SearchComponent />
+      <SearchComponent type={"tv"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.hcard}>
           <HorizontalCard

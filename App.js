@@ -73,12 +73,13 @@ function AuthenticatedTab() {
             />
           ),
           tabBarStyle: {
-            paddingBottom: 10,
+            backgroundColor: Colors.primary50,
+            height: 58,
+          },
+          tabBarItemStyle: {
+            marginBottom: 14,
           },
           tabBarHideOnKeyboard: true,
-          // tabBarBackground: () => {
-          //   Colors.primary10;
-          // },
         }}
         sceneContainerStyle={{ backgroundColor: Colors.primary10 }}
       >
@@ -91,6 +92,7 @@ function AuthenticatedTab() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" color={color} size={size} />
             ),
+
             headerBackVisible: false,
           }}
         />
@@ -109,15 +111,6 @@ function AuthenticatedTab() {
           options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="tv-outline" color={color} size={size} />
-            ),
-          }}
-        />
-        <BottomTab.Screen
-          name="Bookmarks"
-          component={BookMarks}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="bookmark-outline" color={color} size={size} />
             ),
           }}
         />
@@ -142,24 +135,8 @@ function CombineStack() {
         component={AuthenticatedTab}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="MoviesDetails"
-        component={MoviesDetails}
-        options={{
-          headerRight: ({ tintColor }) => (
-            <IconButton icon="bookmark-outline" color={tintColor} size={24} />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="TvShowDetails"
-        component={TvShowDetails}
-        options={{
-          headerRight: ({ tintColor }) => (
-            <IconButton icon="bookmark-outline" color={tintColor} size={24} />
-          ),
-        }}
-      />
+      <Stack.Screen name="MoviesDetails" component={MoviesDetails} />
+      <Stack.Screen name="TvShowDetails" component={TvShowDetails} />
     </Stack.Navigator>
   );
 }

@@ -16,7 +16,7 @@ function HomeScreen() {
 
   return (
     <>
-      <SearchComponent />
+      <SearchComponent type={"home"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.horizontalCardView}>
           <HorizontalCard

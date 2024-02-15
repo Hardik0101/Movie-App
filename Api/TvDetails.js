@@ -10,10 +10,7 @@ export function TvShowDetails({ title, overview }) {
 
   useEffect(() => {
     const fetchTvShowDetails = async () => {
-      const allTvShowDetails = await getTvShowDetails(
-        route.params.id,
-        route.params.type
-      );
+      const allTvShowDetails = await getTvShowDetails(route.params.id);
       setTvDetails(allTvShowDetails);
     };
 

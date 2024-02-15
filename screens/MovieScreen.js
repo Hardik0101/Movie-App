@@ -12,7 +12,7 @@ function MovieScreen({ navigation }) {
 
   return (
     <>
-      <SearchComponent />
+      <SearchComponent type={"movie"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.horizontalCardView}>
           <HorizontalCard
