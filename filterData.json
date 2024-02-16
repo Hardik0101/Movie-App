@@ -1,0 +1,9 @@
+{
+  "movies": [
+    { "name": "Action" },
+    { "name": "Romantic" },
+    { "name": "Thrill" },
+    { "name": "Comedy" }
+  ],
+  "tvshow": [{ "name": "DayShow" }, { "name": "NightShow" }]
+}

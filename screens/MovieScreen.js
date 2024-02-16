@@ -2,10 +2,18 @@ import React, { useEffect } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import HorizontalCard from "../components/Cards/HorizontalCard";
 import SearchComponent from "../components/Cards/Search";
-import { getPopularMovie } from "../Api/ApiCall";
+import {
+  getActionMovies,
+  getComedyMovies,
+  getPopularMovie,
+  getRomanticMovies,
+  getThrillerMovies,
+} from "../Api/ApiCall";
 import VerticalCard from "../components/Cards/VerticalCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieDetailsList } from "../store/redux/movieSlice";
+import IconButton from "../components/UI/IconButton";
+import SearchAndFiter from "../components/Cards/SearchandFilter";
 
 function MovieScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -18,9 +26,13 @@ function MovieScreen({ navigation }) {
   function handlePress(id) {
     navigation.navigate("MoviesDetails", { id });
   }
+
+  function filterHandler() {
+    console.log("filter");
+  }
   return (
     <>
-      <SearchComponent type={"movie"} />
+      <SearchAndFiter type={"movie"} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.horizontalCardView}>
@@ -34,22 +46,22 @@ function MovieScreen({ navigation }) {
           <VerticalCard
             onPress={handlePress}
             children="Comedy Movies"
-            functions={getPopularMovie}
+            functions={getComedyMovies}
           />
           <VerticalCard
             onPress={handlePress}
             children="Romantic Movies"
-            functions={getPopularMovie}
+            functions={getRomanticMovies}
           />
           <VerticalCard
             onPress={handlePress}
             children="Thriller Movies"
-            functions={getPopularMovie}
+            functions={getThrillerMovies}
           />
           <VerticalCard
             onPress={handlePress}
             children="Action Movies"
-            functions={getPopularMovie}
+            functions={getActionMovies}
           />
         </View>
       </ScrollView>

@@ -1,9 +1,15 @@
 import { View, ScrollView, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import HorizontalCard from "../components/Cards/HorizontalCard";
-import SearchComponent from "../components/Cards/Search";
-import { getAiringTodayTvShow, getUpcomingMovie } from "../Api/ApiCall";
+import {
+  getAiringTodayTvShow,
+  getComedyMovies,
+  getRomanticMovies,
+  getThrillerMovies,
+  getUpcomingMovie,
+} from "../Api/ApiCall";
 import VerticalCard from "../components/Cards/VerticalCard";
+import SearchAndFiter from "../components/Cards/SearchandFilter";
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -16,7 +22,7 @@ function HomeScreen() {
 
   return (
     <>
-      <SearchComponent type={"home"} />
+      <SearchAndFiter type={"home"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.horizontalCardView}>
           <HorizontalCard
@@ -27,19 +33,19 @@ function HomeScreen() {
         </View>
         <View style={styles.verticalCardView}>
           <VerticalCard
-            children="New"
+            children="Romantic Movies"
             onPress={handlePress}
-            functions={getUpcomingMovie}
+            functions={getRomanticMovies}
           />
           <VerticalCard
-            children="New"
+            children="Comedy Movies"
             onPress={handlePress}
-            functions={getUpcomingMovie}
+            functions={getComedyMovies}
           />
           <VerticalCard
-            children="New"
+            children="Thriller Movies"
             onPress={handlePress}
-            functions={getUpcomingMovie}
+            functions={getThrillerMovies}
           />
         </View>
         <View style={styles.horizontalCardView}>

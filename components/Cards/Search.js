@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary50,
     borderRadius: 10,
     paddingHorizontal: 10,
-    marginHorizontal: 20,
     marginVertical: 10,
+    width: "80%",
   },
   input: {
     flex: 1,

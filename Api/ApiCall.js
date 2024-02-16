@@ -68,3 +68,36 @@ export async function getTvShowDetails(id) {
     throw error;
   }
 }
+
+// movies api
+
+export async function getMoviesByGenre(genreId) {
+  try {
+    const response = await axios.get(`${API_BASE_URL}discover/movie`, {
+      params: {
+        api_key: API_KEY,
+        with_genres: genreId,
+      },
+    });
+    return response.data.results.slice(0, 10);
+  } catch (error) {
+    console.error(`Error fetching movies for genre ${genreId}:`, error);
+    throw error;
+  }
+}
+
+export async function getComedyMovies() {
+  return getMoviesByGenre(35);
+}
+
+export async function getRomanticMovies() {
+  return getMoviesByGenre(10749);
+}
+
+export async function getThrillerMovies() {
+  return getMoviesByGenre(53);
+}
+
+export async function getActionMovies() {
+  return getMoviesByGenre(28);
+}

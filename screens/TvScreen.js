@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import HorizontalCard from "../components/Cards/HorizontalCard";
-import SearchComponent from "../components/Cards/Search";
 import VerticalCard from "../components/Cards/VerticalCard";
 import { getPopularTvShow } from "../Api/ApiCall";
+import SearchAndFiter from "../components/Cards/SearchandFilter";
 
 function TvShowScreen({ navigation }) {
   function handlePress(id, type) {
@@ -12,7 +12,7 @@ function TvShowScreen({ navigation }) {
 
   return (
     <>
-      <SearchComponent type={"tv"} />
+      <SearchAndFiter type={"tv"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.hcard}>
           <HorizontalCard
