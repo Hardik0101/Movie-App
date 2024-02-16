@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import { Colors } from "./constant/style";
 import IconButton from "./components/UI/IconButton";
 import HomeScreen from "./screens/HomeScreen";
@@ -56,7 +56,6 @@ function AuthenticatedTab() {
       <BottomTab.Navigator
         screenOptions={{
           tabBarActiveTintColor: Colors.primary500,
-          tabBarActiveBackgroundColor: Colors.primary100,
           headerStyle: { backgroundColor: Colors.primary700 },
           headerTintColor: "white",
           headerTitleAlign: "center",
@@ -68,15 +67,29 @@ function AuthenticatedTab() {
               icon="exit-outline"
               color={tintColor}
               size={24}
-              onPress={authCtx.logout}
+              onPress={() => {
+                Alert.alert(
+                  "Logout",
+                  "Are you sure you want to logout?",
+                  [
+                    {
+                      text: "Cancel",
+                      style: "cancel",
+                    },
+                    {
+                      text: "Logout",
+                      onPress: () => authCtx.logout(),
+                    },
+                  ],
+                  { cancelable: false }
+                );
+              }}
             />
           ),
           tabBarStyle: {
             backgroundColor: Colors.primary50,
             height: 58,
-          },
-          tabBarItemStyle: {
-            marginBottom: 14,
+            paddingBottom: 14,
           },
           tabBarHideOnKeyboard: true,
         }}
