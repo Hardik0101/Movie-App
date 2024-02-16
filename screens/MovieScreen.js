@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import HorizontalCard from "../components/Cards/HorizontalCard";
 import SearchComponent from "../components/Cards/Search";
 import { getPopularMovie } from "../Api/ApiCall";
 import VerticalCard from "../components/Cards/VerticalCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovieDetailsList } from "../store/redux/movieSlice";
 
 function MovieScreen({ navigation }) {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state);
+  useEffect(() => {
+    dispatch(fetchMovieDetailsList());
+  }, []);
+  // console.log(data.movies.moviesDetailsList);
+
   function handlePress(id) {
     navigation.navigate("MoviesDetails", { id });
   }
-
   return (
     <>
       <SearchComponent type={"movie"} />
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.horizontalCardView}>
           <HorizontalCard

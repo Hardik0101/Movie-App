@@ -14,8 +14,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import { MoviesDetails } from "./Api/MoviesDetails";
-import { TvShowDetails } from "./Api/TvDetails";
+import { MoviesDetails } from "./screens/MoviesDetails";
+import { TvShowDetails } from "./screens/TvDetails";
 import { Provider } from "react-redux";
 import { store } from "./store/redux/store";
 

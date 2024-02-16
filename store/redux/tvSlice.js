@@ -11,6 +11,9 @@ const tvSlice = createSlice({
     setTvDetails: (state, action) => {
       state.tvShowDetails = action.payload;
     },
+    clearState: (state) => {
+      state.tvShowDetails = null;
+    },
   },
 });
 
@@ -26,5 +29,5 @@ export const fetchTvShowDetails = createAsyncThunk(
   }
 );
 
-export const { setTvDetails } = tvSlice.actions;
+export const { setTvDetails, clearState } = tvSlice.actions;
 export default tvSlice.reducer;

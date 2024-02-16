@@ -8,3 +8,11 @@ export const store = configureStore({
     tvShow: tvReducer,
   },
 });
+
+// const logData = () => {
+//   const state = store.getState();
+//   console.log("Movies:", state.movies);
+//   console.log("TV Shows:", state.tvShow);
+// };
+// store.subscribe(logData);
+// logData();
