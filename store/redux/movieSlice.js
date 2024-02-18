@@ -18,6 +18,9 @@ const movieSlice = createSlice({
     setMovieDetailsList: (state, action) => {
       state.moviesDetailsList = action.payload;
     },
+    setActionMovies: (state, action) => {
+      state.actionMovies = action.payload;
+    },
   },
 });
 
