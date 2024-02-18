@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import SearchComponent from "./Search";
 import { Colors } from "../../constant/style";
@@ -152,9 +153,12 @@ function SearchAndFilter({ type }) {
           <Button onPress={handleClose}>
             <Ionicons name="close-outline" size={24} color={Colors.primary} />
           </Button>
-          <ScrollView style={styles.selectedData}>
+          <ScrollView
+            style={styles.selectedData}
+            showsVerticalScrollIndicator={false}
+          >
             {selectedFilterData.map((item, index) => (
-              <View style={styles.movieItem} key={index}>
+              <SafeAreaView style={styles.dataItem} key={index}>
                 <View style={styles.titleConatiner}>
                   <Text style={styles.movieTitle}>
                     {item.title || item.name}
@@ -166,7 +170,7 @@ function SearchAndFilter({ type }) {
                   }}
                   style={styles.movieImage}
                 />
-              </View>
+              </SafeAreaView>
             ))}
           </ScrollView>
         </View>
@@ -199,8 +203,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary600,
   },
-  movieItem: {
-    marginBottom: 10,
+  dataItem: {
+    marginBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -210,14 +214,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   movieImage: {
-    width: 100,
-    height: 150,
+    width: 70,
+    height: 100,
     resizeMode: "cover",
     borderRadius: 5,
   },
   movieTitle: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     color: "white",
   },
