@@ -2,7 +2,7 @@
   "movies": [
     { "name": "Action" },
     { "name": "Romantic" },
-    { "name": "Thrill" },
+    { "name": "Thriller" },
     { "name": "Comedy" }
   ],
   "tvshow": [{ "name": "DayShow" }, { "name": "NightShow" }]

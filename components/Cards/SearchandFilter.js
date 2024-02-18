@@ -22,8 +22,10 @@ import {
   fetchRomanticMovies,
   fetchThrillerMovies,
 } from "../../store/redux/filterSlice";
+import { useNavigation } from "@react-navigation/native";
 
 function SearchAndFilter({ type }) {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
   useEffect(() => {
@@ -38,33 +40,41 @@ function SearchAndFilter({ type }) {
   }, [dispatch]);
 
   const [showFilters, setShowFilters] = useState(false);
+  const [selectedFilterData, setSelectedFilterData] = useState(null);
 
   const filterHandler = () => {
     setShowFilters(!showFilters);
   };
 
   const handleFilterSelection = async (filter) => {
+    let filterData = null;
     switch (filter) {
       case "Action":
-        console.log("Action data:", data.filter.actionMovies);
+        filterData = data.filter.actionMovies;
         break;
       case "Comedy":
-        console.log(data.filter.comedyMovies);
+        filterData = data.filter.comedyMovies;
         break;
       case "Romantic":
-        console.log(data.filter.romanticMovies);
+        filterData = data.filter.romanticMovies;
         break;
       case "Thriller":
-        console.log(data.filter.thrillerMovies);
-        break;
-      case "DayShow":
-        break;
-      case "NightShow":
+        filterData = data.filter.thrillerMovies;
         break;
       default:
+        break;
     }
 
+    setSelectedFilterData(filterData);
     setShowFilters(false);
+  };
+
+  const handleClose = () => {
+    setSelectedFilterData(null);
+  };
+
+  const handlePress = (item) => {
+    navigation.navigate("MoviesDetails", { id: item.id });
   };
 
   return (
@@ -73,30 +83,51 @@ function SearchAndFilter({ type }) {
       <Button onPress={filterHandler}>
         <Ionicons name="funnel-outline" size={26} />
       </Button>
-      {(showFilters && type === "movie" && (
+      {showFilters && (
         <View style={styles.filterContainer}>
-          {movies.map((filter) => (
-            <TouchableOpacity
-              style={styles.filterOption}
-              onPress={() => handleFilterSelection(filter.name)}
-            >
-              <Text>{filter.name}</Text>
-            </TouchableOpacity>
-          ))}
+          {type === "movie"
+            ? movies.map((filter) => (
+                <TouchableOpacity
+                  key={filter.name}
+                  style={styles.filterOption}
+                  onPress={() => handleFilterSelection(filter.name)}
+                >
+                  <Text>{filter.name}</Text>
+                </TouchableOpacity>
+              ))
+            : tvshow.map((filter) => (
+                <TouchableOpacity
+                  key={filter.name}
+                  style={styles.filterOption}
+                  onPress={() => handleFilterSelection(filter.name)}
+                >
+                  <Text>{filter.name}</Text>
+                </TouchableOpacity>
+              ))}
         </View>
-      )) ||
-        (showFilters && type === "tv" && (
-          <View style={styles.filterContainer}>
-            {tvshow.map((filter) => (
-              <TouchableOpacity
-                style={styles.filterOption}
-                onPress={() => handleFilterSelection(filter.name)}
-              >
-                <Text>{filter.name}</Text>
-              </TouchableOpacity>
+      )}
+      {selectedFilterData && (
+        <View style={styles.selectedDataContainer}>
+          <Button onPress={handleClose}>
+            <Ionicons name="close-outline" size={24} color={Colors.primary} />
+          </Button>
+          <ScrollView style={styles.selectedData}>
+            {selectedFilterData.map((item, index) => (
+              <View style={styles.movieItem} key={index}>
+                <View style={styles.titleConatiner}>
+                  <Text style={styles.movieTitle}>{item.title}</Text>
+                </View>
+                <Image
+                  source={{
+                    uri: (item.poster_path = `https://image.tmdb.org/t/p/w300/${item.poster_path}`),
+                  }}
+                  style={styles.movieImage}
+                />
+              </View>
             ))}
-          </View>
-        ))}
+          </ScrollView>
+        </View>
+      )}
     </View>
   );
 }
@@ -126,11 +157,14 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.primary600,
   },
   movieItem: {
-    marginRight: 10,
     marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: Colors.primary500,
+    overflow: "hidden",
   },
   movieImage: {
     width: 100,
@@ -139,25 +173,32 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   movieTitle: {
-    marginTop: 5,
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     color: "white",
   },
-  actionMoviesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: 70,
-    position: "absolute",
-    zIndex: 999,
-    backgroundColor: Colors.primary700,
+  titleConatiner: {
+    width: "60%",
   },
-  moviesList: {
-    flex: 1,
+  selectedDataContainer: {
     position: "absolute",
-    zIndex: 999,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 1000,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 640,
+  },
+  selectedData: {
     backgroundColor: Colors.primary100,
+    padding: 10,
+    borderRadius: 10,
+    width: "100%",
+    marginTop: 6,
   },
 });
 
