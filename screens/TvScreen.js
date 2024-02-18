@@ -2,7 +2,11 @@ import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import HorizontalCard from "../components/Cards/HorizontalCard";
 import VerticalCard from "../components/Cards/VerticalCard";
-import { getPopularTvShow } from "../Api/ApiCall";
+import {
+  getComedyTvShows,
+  getDramaTvShows,
+  getPopularTvShow,
+} from "../Api/ApiCall";
 import SearchAndFiter from "../components/Cards/SearchandFilter";
 
 function TvShowScreen({ navigation }) {
@@ -24,13 +28,13 @@ function TvShowScreen({ navigation }) {
         <View style={styles.verticalCardView}>
           <VerticalCard
             onPress={handlePress}
-            children="New Tv Show"
-            functions={getPopularTvShow}
+            children="Comedy Show"
+            functions={getComedyTvShows}
           />
           <VerticalCard
             onPress={handlePress}
-            children="New Tv Show"
-            functions={getPopularTvShow}
+            children="Drama Show"
+            functions={getDramaTvShows}
           />
         </View>
       </ScrollView>

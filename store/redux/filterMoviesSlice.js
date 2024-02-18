@@ -7,7 +7,7 @@ import {
   getThrillerMovies,
 } from "../../Api/ApiCall";
 
-const filterSlice = createSlice({
+const filterMovieSlice = createSlice({
   name: "moviesFilter",
   initialState: {
     // filter states
@@ -94,5 +94,5 @@ export const {
   setRomanticMovies,
   setThrillerMovies,
   clearState,
-} = filterSlice.actions;
-export default filterSlice.reducer;
+} = filterMovieSlice.actions;
+export default filterMovieSlice.reducer;

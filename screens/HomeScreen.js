@@ -4,6 +4,9 @@ import HorizontalCard from "../components/Cards/HorizontalCard";
 import {
   getAiringTodayTvShow,
   getComedyMovies,
+  getComedyTvShows,
+  getCrimeTvShows,
+  getDramaTvShows,
   getRomanticMovies,
   getThrillerMovies,
   getUpcomingMovie,
@@ -57,19 +60,19 @@ function HomeScreen() {
         </View>
         <View style={styles.verticalCardView}>
           <VerticalCard
-            children="New"
+            children="Drama Show"
             onPress={handlePressTv}
-            functions={getAiringTodayTvShow}
+            functions={getDramaTvShows}
           />
           <VerticalCard
-            children="New"
+            children="Crime Show"
             onPress={handlePressTv}
-            functions={getAiringTodayTvShow}
+            functions={getCrimeTvShows}
           />
           <VerticalCard
-            children="New"
+            children="Comedy Show"
             onPress={handlePressTv}
-            functions={getAiringTodayTvShow}
+            functions={getComedyTvShows}
           />
         </View>
       </ScrollView>

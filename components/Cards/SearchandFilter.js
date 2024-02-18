@@ -6,13 +6,12 @@ import {
   Text,
   Image,
   ScrollView,
-  FlatList,
 } from "react-native";
 import SearchComponent from "./Search";
 import { Colors } from "../../constant/style";
 import Button from "../UI/Button";
 import { Ionicons } from "@expo/vector-icons";
-import { movies, tvshow } from "../../filterData.json";
+import { movies, tvshow, home } from "../../filterData.json";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,8 +20,16 @@ import {
   fetchComedyMovies,
   fetchRomanticMovies,
   fetchThrillerMovies,
-} from "../../store/redux/filterSlice";
+} from "../../store/redux/filterMoviesSlice";
 import { useNavigation } from "@react-navigation/native";
+import {
+  fetchAnimationShow,
+  fetchComedyShow,
+  fetchCrimeShow,
+  fetchDramaShow,
+} from "../../store/redux/filterTvShowSlice";
+import { fetchMovieDetailsList } from "../../store/redux/movieSlice";
+import { fetchTvShowDetailsList } from "../../store/redux/tvSlice";
 
 function SearchAndFilter({ type }) {
   const navigation = useNavigation();
@@ -33,6 +40,12 @@ function SearchAndFilter({ type }) {
     dispatch(fetchRomanticMovies());
     dispatch(fetchThrillerMovies());
     dispatch(fetchComedyMovies());
+    dispatch(fetchAnimationShow());
+    dispatch(fetchComedyShow());
+    dispatch(fetchDramaShow());
+    dispatch(fetchCrimeShow());
+    dispatch(fetchMovieDetailsList());
+    dispatch(fetchTvShowDetailsList());
 
     return () => {
       dispatch(clearState());
@@ -60,6 +73,24 @@ function SearchAndFilter({ type }) {
         break;
       case "Thriller":
         filterData = data.filter.thrillerMovies;
+        break;
+      case "Animation":
+        filterData = data.filterTv.animationShow;
+        break;
+      case "ComedyShow":
+        filterData = data.filterTv.comedyShow;
+        break;
+      case "Crime":
+        filterData = data.filterTv.crimeShow;
+        break;
+      case "Drama":
+        filterData = data.filterTv.dramaShow;
+        break;
+      case "Movies":
+        filterData = data.movies.moviesDetailsList;
+        break;
+      case "TvShow":
+        filterData = data.tvShow.tvShowDetailsList;
         break;
       default:
         break;
@@ -95,6 +126,16 @@ function SearchAndFilter({ type }) {
                   <Text>{filter.name}</Text>
                 </TouchableOpacity>
               ))
+            : type === "home"
+            ? home.map((filter) => (
+                <TouchableOpacity
+                  key={filter.name}
+                  style={styles.filterOption}
+                  onPress={() => handleFilterSelection(filter.name)}
+                >
+                  <Text>{filter.name}</Text>
+                </TouchableOpacity>
+              ))
             : tvshow.map((filter) => (
                 <TouchableOpacity
                   key={filter.name}
@@ -115,7 +156,9 @@ function SearchAndFilter({ type }) {
             {selectedFilterData.map((item, index) => (
               <View style={styles.movieItem} key={index}>
                 <View style={styles.titleConatiner}>
-                  <Text style={styles.movieTitle}>{item.title}</Text>
+                  <Text style={styles.movieTitle}>
+                    {item.title || item.name}
+                  </Text>
                 </View>
                 <Image
                   source={{

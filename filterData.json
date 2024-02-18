@@ -5,5 +5,11 @@
     { "name": "Thriller" },
     { "name": "Comedy" }
   ],
-  "tvshow": [{ "name": "DayShow" }, { "name": "NightShow" }]
+  "tvshow": [
+    { "name": "Animation" },
+    { "name": "ComedyShow" },
+    { "name": "Crime" },
+    { "name": "Drama" }
+  ],
+  "home": [{ "name": "Movies" }, { "name": "TvShow" }]
 }
