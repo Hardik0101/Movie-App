@@ -34,6 +34,8 @@ import { fetchTvShowDetailsList } from "../../store/redux/tvSlice";
 
 function SearchAndFilter({ type }) {
   const navigation = useNavigation();
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedFilterData, setSelectedFilterData] = useState(null);
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
   useEffect(() => {
@@ -52,9 +54,6 @@ function SearchAndFilter({ type }) {
       dispatch(clearState());
     };
   }, [dispatch]);
-
-  const [showFilters, setShowFilters] = useState(false);
-  const [selectedFilterData, setSelectedFilterData] = useState(null);
 
   const filterHandler = () => {
     setShowFilters(!showFilters);
